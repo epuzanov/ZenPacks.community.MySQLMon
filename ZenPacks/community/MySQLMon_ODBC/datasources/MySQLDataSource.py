@@ -1,7 +1,7 @@
 ################################################################################
 #
 # This program is part of the SQLDS_example Zenpack for Zenoss.
-# Copyright (C) 2010 Egor Puzanov.
+# Copyright (C) 2010, 2011 Egor Puzanov.
 #
 # This program can be used under the GNU General Public License version 2
 # You can find full information here: http://www.zenoss.com/oss
@@ -13,9 +13,9 @@ __doc__="""MySQLDataSource
 Defines attributes for how a datasource will be graphed
 and builds the nessesary DEF and CDEF statements for it.
 
-$Id: MySQLDataSource.py,v 1.0 2010/06/16 15:17:10 egor Exp $"""
+$Id: MySQLDataSource.py,v 1.1 2011/01/18 23:44:32 egor Exp $"""
 
-__version__ = "$Revision: 1.0 $"[11:-2]
+__version__ = "$Revision: 1.1 $"[11:-2]
 
 from ZenPacks.community.SQLDataSource.datasources import SQLDataSource
 
@@ -43,8 +43,6 @@ class MySQLDataSource(SQLDataSource.SQLDataSource):
         {'id':'timeout', 'type':'int', 'mode':'w'},
         )
 
-    _relations = SQLDataSource.SQLDataSource._relations + (
-        )
 
     # Screen action bindings (and tab definitions)
     factory_type_information = ( 
@@ -63,7 +61,7 @@ class MySQLDataSource(SQLDataSource.SQLDataSource):
 
 
     def getConnectionString(self, context):
-        return "MySQLdb,%s"%SQLDataSource.SQLDataSource.getCommand(self,context,
+        return "'MySQLdb',%s"%self.getCommand(context,
                                         ','.join(["host='%s'"%self.hostname,
                                                  "port=%s"%self.port,
                                                  "user='%s'"%self.username,

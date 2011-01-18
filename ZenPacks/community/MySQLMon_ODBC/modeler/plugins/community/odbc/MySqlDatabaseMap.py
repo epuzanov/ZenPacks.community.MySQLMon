@@ -1,7 +1,7 @@
 ################################################################################
 #
 # This program is part of the MySQLMon_ODBC Zenpack for Zenoss.
-# Copyright (C) 2009, 2010 Egor Puzanov.
+# Copyright (C) 2009, 2010, 2011 Egor Puzanov.
 #
 # This program can be used under the GNU General Public License version 2
 # You can find full information here: http://www.zenoss.com/oss
@@ -12,9 +12,9 @@ __doc__="""MySqlDatabaseMap.py
 
 MySqlDatabaseMap maps the MySQL Databases table to Database objects
 
-$Id: MySqlDatabaseMap.py,v 1.4 2010/12/15 21:04:28 egor Exp $"""
+$Id: MySqlDatabaseMap.py,v 1.5 2011/01/18 23:42:12 egor Exp $"""
 
-__version__ = "$Revision: 1.4 $"[11:-2]
+__version__ = "$Revision: 1.5 $"[11:-2]
 
 from Products.ZenModel.ZenPackPersistence import ZenPackPersistence
 from Products.DataCollector.plugins.DataMaps import MultiArgs
@@ -43,7 +43,7 @@ class MySqlDatabaseMap(ZenPackPersistence, SQLPlugin):
         pwd = getattr(device, 'zMySqlPassword', None)
         for cs in getattr(device, 'zMySqlConnectionString', ['DRIVER={MySQL}']):
             options = dict([opt.split('=') for opt in cs.split(';')])
-            cs = ['MySQLdb']
+            cs = ["'MySQLdb'"]
             cs.append("host='%s'"%options.get('SERVER', device.manageIp))
             cs.append("port=%s"%options.get('PORT', '3306'))
             cs.append("db='information_schema'")
