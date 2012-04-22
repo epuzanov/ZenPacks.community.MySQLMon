@@ -1,7 +1,7 @@
 ################################################################################
 #
-# This program is part of the MySQLMon_ODBC Zenpack for Zenoss.
-# Copyright (C) 2009, 2010 Egor Puzanov.
+# This program is part of the MySQLMon Zenpack for Zenoss.
+# Copyright (C) 2009-2012 Egor Puzanov.
 #
 # This program can be used under the GNU General Public License version 2
 # You can find full information here: http://www.zenoss.com/oss
@@ -12,9 +12,9 @@ __doc__="""MySqlSrvInst
 
 MySqlSrvInst is a SrvInst
 
-$Id: MySqlSrvInst.py,v 1.0 2010/10/05 21:19:17 egor Exp $"""
+$Id: MySqlSrvInst.py,v 1.1 2012/04/22 21:42:59 egor Exp $"""
 
-__version__ = "$Revision: 1.0 $"[11:-2]
+__version__ = "$Revision: 1.1 $"[11:-2]
 
 from Globals import InitializeClass
 from Products.ZenModel.ZenossSecurity import *
@@ -26,7 +26,7 @@ class MySqlSrvInst(DBSrvInst):
     MySQL SrvInst object
     """
 
-    ZENPACKID = 'ZenPacks.community.MySQLMon_ODBC'
+    ZENPACKID = 'ZenPacks.community.MySQLMon'
 
     hostname = ''
     port = 0
@@ -50,7 +50,7 @@ class MySqlSrvInst(DBSrvInst):
             'meta_type'      : 'MySqlSrvInst',
             'description'    : """Arbitrary device grouping class""",
             'icon'           : 'FileSystem_icon.gif',
-            'product'        : 'MySQLMon_ODBC',
+            'product'        : 'MySQLMon',
             'factory'        : 'manage_addDBSrvInst',
             'immediate_view' : 'viewMySqlSrvInst',
             'actions'        :
@@ -83,14 +83,5 @@ class MySqlSrvInst(DBSrvInst):
             )
           },
         )
-
-    def zMySqlConnectionString(self):
-        """
-        Return the ODBC connection string
-        """
-        cs = getattr(self.device().primaryAq(),
-                    'zMySqlConnectionString',
-                    ['DRIVER={MySQL}'])
-        return cs[int(self.dbsiname)]
 
 InitializeClass(MySqlSrvInst)

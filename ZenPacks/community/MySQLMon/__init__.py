@@ -14,8 +14,9 @@ class ZenPack(ZenPackBase):
     """
 
     packZProperties = [
-            ('zMySqlConnectionString', ['DRIVER={MySQL};OPTION=3;PORT=3306'], 'lines'),
+            ('zMySqlConnectionString', "'MySQLdb',host='${here/manageIp}',port=${here/port},db='information_schema',user='${here/zMySqlUsername}',passwd='${here/zMySqlPassword}'", 'string'),
             ('zMySqlUsername', 'zenoss', 'string'),
             ('zMySqlPassword', '', 'password'),
+            ('zMySqlPorts', ['3306'], 'lines'),
             ]
 

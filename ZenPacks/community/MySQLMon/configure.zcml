@@ -4,11 +4,6 @@
 
     <configure zcml:condition="installed Products.Zuul">
 
-        <adapter factory=".info.MySQLDataSourceInfo"
-                 for=".datasources.MySQLDataSource.MySQLDataSource"
-                 provides=".interfaces.IMySQLDataSourceInfo"
-                 />
-
         <adapter factory=".info.MySqlDatabaseInfo"
                  for=".MySqlDatabase.MySqlDatabase"
                  provides=".interfaces.IMySqlDatabaseInfo"

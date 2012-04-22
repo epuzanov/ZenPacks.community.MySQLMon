@@ -1,7 +1,7 @@
 ################################################################################
 #
-# This program is part of the MySQLMon_ODBC Zenpack for Zenoss.
-# Copyright (C) 2009, 2010 Egor Puzanov.
+# This program is part of the MySQLMon Zenpack for Zenoss.
+# Copyright (C) 2009-2012 Egor Puzanov.
 #
 # This program can be used under the GNU General Public License version 2
 # You can find full information here: http://www.zenoss.com/oss
@@ -12,9 +12,9 @@ __doc__="""MySqlDatabase
 
 MySqlDatabase is a Database
 
-$Id: MySqlDatabase.py,v 1.2 2010/10/05 21:20:30 egor Exp $"""
+$Id: MySqlDatabase.py,v 1.3 2012/04/22 21:42:16 egor Exp $"""
 
-__version__ = "$Revision: 1.2 $"[11:-2]
+__version__ = "$Revision: 1.3 $"[11:-2]
 
 from Globals import InitializeClass
 from Products.ZenModel.ZenossSecurity import *
@@ -26,7 +26,7 @@ class MySqlDatabase(Database):
     MySQL Database object
     """
 
-    ZENPACKID = 'ZenPacks.community.MySQLMon_ODBC'
+    ZENPACKID = 'ZenPacks.community.MySQLMon'
 
     collation = ''
 
@@ -42,7 +42,7 @@ class MySqlDatabase(Database):
             'meta_type'      : 'MySqlDatabase',
             'description'    : """Arbitrary device grouping class""",
             'icon'           : 'FileSystem_icon.gif',
-            'product'        : 'MySQLMon_ODBC',
+            'product'        : 'MySQLMon',
             'factory'        : 'manage_addDatabase',
             'immediate_view' : 'viewMySqlDatabase',
             'actions'        :
@@ -84,23 +84,13 @@ class MySqlDatabase(Database):
         Return the hostname attribute of DBSrvInst
         """
         inst = self.getDBSrvInst()
-        if inst: return inst.hostname
-        else: return self.device().manageIp
+        return inst and inst.hostname or self.device().manageIp
 
     def port(self):
         """
         Return the port attribute of DBSrvInst
         """
         inst = self.getDBSrvInst()
-        if inst: return inst.port
-        else: return 3306
-
-    def zMySqlConnectionString(self):
-        """
-        Return the ODBC connection string
-        """
-        inst = self.getDBSrvInst()
-        if inst: return inst.zMySqlConnectionString()
-        else: return 'DRIVER={MySQL}'
+        return inst and inst.port or 3306
 
 InitializeClass(MySqlDatabase)

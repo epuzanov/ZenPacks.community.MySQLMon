@@ -1,7 +1,7 @@
 ################################################################################
 #
-# This program is part of the MySQLMon_ODBC Zenpack for Zenoss.
-# Copyright (C) 2009, 2010 Egor Puzanov.
+# This program is part of the MySQLMon Zenpack for Zenoss.
+# Copyright (C) 2009-2012 Egor Puzanov.
 #
 # This program can be used under the GNU General Public License version 2
 # You can find full information here: http://www.zenoss.com/oss
@@ -12,25 +12,13 @@ __doc__="""interfaces
 
 describes the form field to the user interface.
 
-$Id: interfaces.py,v 1.2 2010/10/06 10:28:14 egor Exp $"""
+$Id: interfaces.py,v 1.3 2012/04/22 22:07:02 egor Exp $"""
 
-__version__ = "$Revision: 1.2 $"[11:-2]
+__version__ = "$Revision: 1.3 $"[11:-2]
 
-from Products.Zuul.interfaces import IInfo
 from Products.Zuul.form import schema
 from Products.Zuul.utils import ZuulMessageFactory as _t
 from ZenPacks.community.RDBMS.interfaces import IDatabaseInfo, IDBSrvInstInfo
-
-
-class IMySQLDataSourceInfo(IInfo):
-    name = schema.Text(title=_t(u'Name'))
-    enabled = schema.Bool(title=_t(u'Enabled'))
-    hostname = schema.Text(title=_t(u'MySQL Host'))
-    port = schema.Text(title=_t(u'MySQL Port'))
-    username = schema.Text(title=_t(u'MySQL Username'))
-    password = schema.Text(title=_t(u'MySQL Password'))
-    dbname = schema.Text(title=_t(u'MySQL Database'))
-    sql = schema.TextLine(title=_t(u'SQL Query'))
 
 
 class IMySqlDatabaseInfo(IDatabaseInfo):
