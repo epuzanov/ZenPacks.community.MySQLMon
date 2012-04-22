@@ -122,11 +122,13 @@ Performance graphs
 ------------------
 
 Database Server Instance
+
 - MySQL - Command Statistics
 - MySQL - Select Statistics
 - MySQL - Handler Statistics
 - MySQL - Network Traffic
 
 Database
+
 - MySQL - Database Size
  
