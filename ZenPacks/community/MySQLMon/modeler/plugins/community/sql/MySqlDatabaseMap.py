@@ -12,7 +12,7 @@ __doc__="""MySqlDatabaseMap.py
 
 MySqlDatabaseMap maps the MySQL Databases table to Database objects
 
-$Id: MySqlDatabaseMap.py,v 1.6 2012/04/22 21:44:27 egor Exp $"""
+$Id: MySqlDatabaseMap.py,v 1.6 2012/04/23 19:19:54 egor Exp $"""
 
 __version__ = "$Revision: 1.6 $"[11:-2]
 
@@ -40,11 +40,13 @@ class MySqlDatabaseMap(ZenPackPersistence, SQLPlugin):
         tasks = {}
         connectionString = getattr(device, 'zMySqlConnectionString', '') or \
             "'MySQLdb',host='${here/manageIp}',port=${here/port},db='information_schema',user='${here/zMySqlUsername}',passwd='${here/zMySqlPassword}'"
-        for ins, port in enumerate(getattr(device,'zMySqlPorts','') or ['']): 
-            port = port and int(port) or 3306
-            setattr(device, 'port', port)
+        ports = getattr(device,'zMySqlPorts','') or '3306'
+        if type(ports) is str:
+            ports = [ports]
+        for inst, port in enumerate(ports):
+            setattr(device, 'port', int(port))
             cs = self.prepareCS(device, connectionString)
-            tasks['si_%s'%ins] = (
+            tasks['si_%s'%inst] = (
                 "SHOW VARIABLES",
                 None,
                 cs,
@@ -55,14 +57,14 @@ class MySqlDatabaseMap(ZenPackPersistence, SQLPlugin):
                     'version':'version',
                     'version_compile_machine':'setProductKey',
                 })
-            tasks['vr_%s'%ins] = (
+            tasks['vr_%s'%inst] = (
                 "SHOW VARIABLES WHERE Variable_name like 'have_%' AND Value='YES'",
                 None,
                 cs,
                 {
                     'Variable_name':'have',
                 })
-            tasks['db_%s'%ins] = (
+            tasks['db_%s'%inst] = (
                 """SELECT table_schema,
                           engine,
                           MIN(create_time) as created,
@@ -70,7 +72,7 @@ class MySqlDatabaseMap(ZenPackPersistence, SQLPlugin):
                           MIN(table_collation) as collation,
                           '%s' as instance
                    FROM TABLES
-                   GROUP BY table_schema"""%ins,
+                   GROUP BY table_schema"""%inst,
                 None,
                 cs,
                 {
