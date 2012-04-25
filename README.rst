@@ -7,7 +7,6 @@ About
 
 This project is `Zenoss <http://www.zenoss.com/>`_ extension (ZenPack) that
 makes it possible to model and monitor MySQL databases.
-databases.
 
 Requirements
 ============
@@ -27,15 +26,11 @@ You must first install
 - `SQLDataSource ZenPack <http://community.zenoss.org/docs/DOC-5913>`_
 - `RDBMS Monitoring ZenPack <http://community.zenoss.org/docs/DOC-3447>`_
 
-If you have an old version (ZenPacks.community.MySQLMon_ODBC) of this ZenPack
-installed, please uninstall it first.
-
 External dependencies
 ---------------------
 
 You can use **pyisqldb** module provided by SQLDataSource ZenPack in combination
-with MySQL ODBC driver, or install Python DB-API 2.0 compatible **MySQLdb**
-module.
+with MySQL ODBC driver, or Python DB-API 2.0 compatible **MySQLdb** module.
 
 - **pyisqldb** - DB-API 2.0 compatible wrapper for **isql** command from
   `unixODBC <http://www.unixodbc.org/>`_. MySQL ODBC driver must be
@@ -67,6 +62,9 @@ module.
 
 Installation
 ============
+
+If you have an old version (ZenPacks.community.MySQLMon_ODBC) of this ZenPack
+installed, please uninstall it first.
 
 Normal Installation (packaged egg)
 ----------------------------------
@@ -116,19 +114,18 @@ Monitoring Templates
 --------------------
 
 - MySqlSrvInst
-- MySqlTablespace
+- MySqlDatabase
 
 Performance graphs
 ------------------
 
-Database Server Instance
+**MySqlSrvInst**
 
 - MySQL - Command Statistics
 - MySQL - Select Statistics
 - MySQL - Handler Statistics
 - MySQL - Network Traffic
 
-Database
+**MySqlDatabase**
 
 - MySQL - Database Size
- 

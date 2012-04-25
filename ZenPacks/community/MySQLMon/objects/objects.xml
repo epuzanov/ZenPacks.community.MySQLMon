@@ -56,7 +56,41 @@ GAUGE
 True
 </property>
 </object>
+<object id='status_count' module='Products.ZenModel.RRDDataPoint' class='RRDDataPoint'>
+<property select_variable="rrdtypes" type="selection" id="rrdtype" mode="w" >
+GAUGE
+</property>
+<property type="boolean" id="isrow" mode="w" >
+True
+</property>
+<tomanycont id='aliases'>
+<object id='table_schema' module='Products.ZenModel.RRDDataPointAlias' class='RRDDataPointAlias'>
+</object>
 </tomanycont>
+</object>
+</tomanycont>
+</object>
+</tomanycont>
+<tomanycont id='thresholds'>
+<object id='status' module='Products.ZenModel.MinMaxThreshold' class='MinMaxThreshold'>
+<property type="lines" id="dsnames" mode="w" >
+['sizeUsed_status_count']
+</property>
+<property type="boolean" id="enabled" mode="w" >
+True
+</property>
+<property type="string" id="minval" mode="w" >
+1
+</property>
+<property type="string" id="eventClass" mode="w" >
+/Status/MySqlDatabase
+</property>
+<property type="int" id="severity" mode="w" >
+4
+</property>
+<property type="int" id="escalateCount" mode="w" >
+0
+</property>
 </object>
 </tomanycont>
 <tomanycont id='graphDefs'>
