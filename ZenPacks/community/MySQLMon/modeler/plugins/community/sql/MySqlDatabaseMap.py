@@ -12,9 +12,9 @@ __doc__="""MySqlDatabaseMap.py
 
 MySqlDatabaseMap maps the MySQL Databases table to Database objects
 
-$Id: MySqlDatabaseMap.py,v 1.6 2012/04/23 19:19:54 egor Exp $"""
+$Id: MySqlDatabaseMap.py,v 1.7 2012/04/26 22:59:16 egor Exp $"""
 
-__version__ = "$Revision: 1.6 $"[11:-2]
+__version__ = "$Revision: 1.7 $"[11:-2]
 
 from Products.ZenModel.ZenPackPersistence import ZenPackPersistence
 from Products.DataCollector.plugins.DataMaps import MultiArgs
@@ -55,14 +55,14 @@ class MySqlDatabaseMap(ZenPackPersistence, SQLPlugin):
                     'port':'port',
                     'license':'license',
                     'version':'version',
-                    'version_compile_machine':'setProductKey',
+                    'setProductKey':'version_compile_machine',
                 })
             tasks['vr_%s'%inst] = (
                 "SHOW VARIABLES WHERE Variable_name like 'have_%' AND Value='YES'",
                 None,
                 cs,
                 {
-                    'Variable_name':'have',
+                    'have':'Variable_name',
                 })
             tasks['db_%s'%inst] = (
                 """SELECT table_schema,
@@ -76,12 +76,12 @@ class MySqlDatabaseMap(ZenPackPersistence, SQLPlugin):
                 None,
                 cs,
                 {
-                    'table_schema':'dbname',
-                    'engine':'type',
-                    'created':'activeTime',
+                    'dbname':'table_schema',
+                    'type':'engine',
+                    'activeTime':'created',
                     'version':'version',
                     'collation':'collation',
-                    'instance':'setDBSrvInst',
+                    'setDBSrvInst':'instance',
                 })
         return tasks
 
