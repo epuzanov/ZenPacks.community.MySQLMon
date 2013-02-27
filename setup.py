@@ -3,9 +3,9 @@
 # or saved.  Do not modify them directly here.
 # NB: PACKAGES is deprecated
 NAME = "ZenPacks.community.MySQLMon"
-VERSION = "3.3"
+VERSION = "3.4"
 AUTHOR = "Egor Puzanov"
-LICENSE = ""
+LICENSE = "GPLv2"
 NAMESPACE_PACKAGES = ['ZenPacks', 'ZenPacks.community']
 PACKAGES = ['ZenPacks', 'ZenPacks.community', 'ZenPacks.community.MySQLMon']
 INSTALL_REQUIRES = ['ZenPacks.community.RDBMS>=2.3', 'ZenPacks.community.SQLDataSource>=2.0']
